@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Yahtzee</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <style>
+        body {
+            background-image: linear-gradient(#2a5050, #0000);
+        }
+
+        .dice {
+            width: 100px; 
+            height: 100px; 
+            margin: 5px;
+            display: inline-block;
+            text-align: center;
+            line-height: 100px;
+            transition: opacity 0.5s ease-in-out; 
+        }
+
+        .dice img {
+            width: 100%;
+            height: 100%; 
+        }
+
+        .rolling {
+            animation: fadeAnimation 3s ease-in-out;
+        }
+
+        .rightbox {
+            background-image: linear-gradient(#506e42, #04300a00);
+            height: 1000px;
+            width: 40%;
+            float: right;
+            text-align: left;
+            border: 5px double #080606;
+        }
+
+        .button {
+            display: block;
+            margin: 20px auto;
+            padding: 15px 25px;
+            font-size: 24px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            outline: none;
+            color: #fff;
+            background-color: #19938b;
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 9px #999;
+        }
+        .button:hover {background-color: #3e8e41}
+
+        .button:active {
+        background-color: #3e8e41;
+        box-shadow: 0 5px #666;
+        transform: translateY(4px);
+        }
+
+        @keyframes fadeAnimation {
+            0% {
+                opacity: 1;
+            }
+            /* 25% {
+                opacity: 0.5;
+            } */
+            50% {
+                opacity: 0;
+            }
+            75% {
+                opacity: 0.5;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+    </style>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#roll").on("click", function () {
+                rollDice();
+            });
+        });
+
+        function rollDice() {
+            $(".dice").addClass("rolling");
+
+            setTimeout(function () {
+                $(".dice").removeClass("rolling");
+
+                $(".dice").each(function () {
+                    var randomValue = Math.floor(Math.random() * 6) + 1;
+                    $(this).html('<img src="dices images/dice' + randomValue + '.png" alt="Die ' + randomValue + '">');
+                });
+            }, 1000);
+        }
+    </script>
+</head>
+<body>
+    <h1>Yahtzee Game</h1>
+    <div class="rightbox">
+        <span id="0" class="dice"><img src="dices images/dice1.png" alt="Die 1"></span>
+        <span id="1" class="dice"><img src="dices images/dice2.png" alt="Die 2"></span>
+        <span id="2" class="dice"><img src="dices images/dice3.png" alt="Die 3"></span>
+        <span id="3" class="dice"><img src="dices images/dice4.png" alt="Die 4"></span>
+        <span id="4" class="dice"><img src="dices images/dice5.png" alt="Die 5"></span>
+    </div>
+    <button class="button" id="roll">Roll</button>
+</body>
+</html>
